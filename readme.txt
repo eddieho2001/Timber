@@ -1,3 +1,7 @@
+Current Reading:
+1 ) 01-01-BeginningC++GameProgramming-LearnC++FromScratchByBuildingFunGames 3rd Ed.pdf
+2 ) MasteringC++GameDevelopment-CreateProfessionalAndRealistic3DGamesUsingC++17
+
 Timberman:
 Version Facts(Changed/Added/Modified/Deleted)
 - v0.0.3 - Change Application object's ctor for which pass parameters for configure screen window
@@ -5,6 +9,8 @@ Version Facts(Changed/Added/Modified/Deleted)
 		 - Change how Application object load texture from assets folder by AssetManager
          - Add build time generate context in config.h.in with game/CMakeList.txt		 
 
+- v0.0.4 - Add Actor class for the game that represent nay moveable or non-moveable object in the game.
+           Add World class that manage lifetime and activities of that actors. 
 Game Mechanics:
 	- Time is always running out.
 	- You can get more time by chopping the tree.
