@@ -57,4 +57,56 @@ Internal/Local coordinates
 	All sprites have what is known as an origin.
 	If we draw a sprite to a specific location on the screen, it is the origin that will be located at this specific location.
 	The 0,0 coordinates of the sprite are its origin.
+
+Relation between sf::Texture & sf::Sprite
+	In order to display graphics on screen it need two objects sf::Texture & sf::Sprite work together
+	sf::Texture store image/graphics context in GPU as [data]
+	SF::Sprite manipulate graphics object(data)        [operation]
+	Why SFML design that way?
+		- The reason is because of the way that graphics cards and OpenGL work
+		- The second, the process of sf::Texture load graphics context to GPU memory is very slow.
+		  Its slow enough that you can’t do it every frame of the game loop. So, it is useful to disassociate the texture 
+		  object from any code that we will manipulate during the game loop.
+    Therefore, Any objects that are made from the Texture class will sit happily on the GPU, just waiting for an associated
+	Sprite object to tell it where to show itself. At the same time we can also reuse the same Texture object with multiple 
+	different Sprite objects, which makes efficient use of GPU memory.
+
+Actor concept in Unreal Engine:
+ - From Copilot : In Unreal Engine, an Actor is the fundamental building block of gameplay. 
+			      It's any object that can be placed or spawned in a level—think of it as the equivalent of a GameObject in Unity.
+				  
+				  An Actor is a class that that represents anything that can exist in the game world.
+				  Examples include lights, cameras, characters, pickups, doors, and even invisible triggers.
+				  Actors can be moved, rotated, scaled, and interacted with during gameplay.
+				  Actor Lifecycle:
+				  - Spawned: Created during gameplay using SpawnActor()
+				  - Ticked: Updated every frame via the Tick() function.
+	              - Destroyed: Removed from the world using Destroy().
+                  
+				  Actors also support replication, which is essential for multiplayer games—keeping objects in sync across clients.
+
+AActor and UWorld classes in Unreal Engine:
+ - From Copilot : World(The Game Environment)
+					- Represents the entire game world or level.
+					- Manages Actors, physics, rendering, and game flow.
+					- Contains systems like navigation, AI, and timers.
+					- You can access it using GetWorld() from most gameplay classes.
+
+				  AActor(The Game Object)
+					- Base class for anything placed or spawned in the world.
+					- Includes characters, props, lights, cameras, triggers, etc.
+					- Lives inside a UWorld instance.
+					- Can be spawned dynamically using UWorld::SpawnActor().
+
+				  How They Work Together
+				  Relationship   | Description  
+				  - Containment  | - UWorld holds and manages all AActor instances. 
+				  - Spawning     | - You use UWorld::SpawnActor() to create new AActors at runtime. 
+				  - Lifecycle 	 | - Actors are ticked, updated, and destroyed by the UWorld. 
+				  - Access 		 | - Actors can call GetWorld() to interact with their environment. 
+
+ 
+    	
+	
+
 	
