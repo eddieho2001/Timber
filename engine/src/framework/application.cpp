@@ -1,13 +1,16 @@
 #include "framework/application.h"
+#include "framework/AssetManager.h"
+
 #include <iostream>
 
-const float ly::Application::PlayerSpeed = 100.f;
+const float timber::Application::PlayerSpeed = 100.f;
 //const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
-ly::Application::Application()
-	: mWindow{ sf::VideoMode(640, 480), "SFML Application" },
+timber::Application::Application(unsigned int winWidth, unsigned int winHeight, const std::string& title, sf::Uint32 style)
+	: mWindow{ sf::VideoMode(winWidth, winHeight), title, style },
 	  mPlayer{},
 	  mTexture{},
+	  mBackground{},
 	  mIsMovingUp{ false }, 
 	  mIsMovingDown{ false }, 
 	  mIsMovingLeft{ false }, 
@@ -16,13 +19,7 @@ ly::Application::Application()
 	  mTickClock{}
 {
 
-	if (!mTexture.loadFromFile("D:/MyDocs/GameDev/Udemy/LearnC++AndMakeaGameFromScratch/Section06/EagleGame/Eagle.png")) {
-		std::cout << "Load error!" << std::endl;
-	}
-	else {
-		mPlayer.setTexture(mTexture);
-		mPlayer.setPosition(100.f, 100.f);
-	}
+	
 	/*
 	mPlayer.setRadius(40.f);
 	mPlayer.setPosition(100.f, 100.f);
@@ -30,7 +27,7 @@ ly::Application::Application()
 	*/
 }
 
-void ly::Application::run() {
+void timber::Application::run() {
 	//The game loop: An iteration of the game loop is often call frame/tick
 	//Frame per Second(FPS) - A measurement of how many loops iteration the game can do during a second.  
 	
@@ -39,6 +36,15 @@ void ly::Application::run() {
 	//sf::Clock clock;
 	//sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	//--------------------------------
+	mTexture = AssetManager::GetInstance().LoadTexture("graphics/background.png");
+	if (!mTexture) {
+		std::cout << "Load error!" << std::endl;
+	}
+	else {
+		mPlayer.setTexture(*mTexture);
+		mPlayer.setPosition(0.f, 0.f);
+	}
+	
 	mTickClock.restart();
 	float accumulatedTime{ 0.f };
 	float targetDeltaTime{ 1.f / mTargetFrameRate }; //=0.016666666s
@@ -88,7 +94,7 @@ void ly::Application::run() {
 	}
 }
 
-void ly::Application::processEvents() {
+void timber::Application::processEvents() {
 	sf::Event event;
 	while (mWindow.pollEvent(event))
 	{
@@ -119,7 +125,7 @@ void ly::Application::processEvents() {
  *	Because the update is frame-dependent(i.e. it depend on the time frame)
  *  In order to solve it we can apply the formula d = speed * time (delta time)
  */
-void ly::Application::update(sf::Time& deltaTime) {
+void timber::Application::update(sf::Time& deltaTime) {
 	std::cout << "Tick at frame rate : " << 1.f / deltaTime.asSeconds() << std::endl;
 	sf::Vector2f movement{ 0.f, 0.f };
 	if (mIsMovingUp)
@@ -134,14 +140,19 @@ void ly::Application::update(sf::Time& deltaTime) {
 	mPlayer.move(movement * deltaTime.asSeconds());
 }
 
-void ly::Application::render() {
+void timber::Application::render() {
 	mWindow.clear();
 	mWindow.draw(mPlayer);
 	mWindow.display();
 }
 
-void ly::Application::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
+void timber::Application::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
+	if (key == sf::Keyboard::Escape) {
+		mWindow.close();
+		return;
+	}
+
 	if (key == sf::Keyboard::Up) {
 		mIsMovingUp = isPressed;
 	}

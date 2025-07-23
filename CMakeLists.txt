@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(QUILL_LIB_NAME quill)
 set(SFML_LIB_NAME SFML)
 # define the project with name as LightYears
-project(Timber VERSION 0.0.1)
+project(Timber VERSION 0.0.3)
 message(STATUS "project level --> Project Name           : ${PROJECT_NAME}")
 message(STATUS "project level --> Project Current Version: ${CURRENT_VERSION}")
 message(STATUS "project level --> external Libraries     : ${SFML_LIB_NAME}, ${QUILL_LIB_NAME}")
@@ -14,9 +14,9 @@ message(STATUS "project level --> CMAKE_PROJECT_NAME     : ${CMAKE_PROJECT_NAME}
 message(STATUS "project level --> PROJECT_SOURCE_DIR     : ${PROJECT_SOURCE_DIR}")
 message(STATUS "project level --> PROJECT_BINARY_DIR     : ${PROJECT_BINARY_DIR}")
 
-message(STATUS "task hository --> 0.0.1 v ---> Fixed-frame rate method not work decribed in [SFML Game Developement By Example]")
-message(STATUS "task hository --> 0.0.2 v ---> split project as 1. engine library target 2. game executable target")
-
+message(STATUS "task hository --> v0.0.1 ---> Fixed-frame rate method not work decribed in [SFML Game Developement By Example]")
+message(STATUS "task hository --> v0.0.2 ---> split project as 1. engine library target 2. game executable target")
+message(STATUS "task hository --> v0.0.3 ---> reference readme.txt")
 
 
 # set all built output directory

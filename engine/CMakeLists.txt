@@ -3,9 +3,12 @@ message(STATUS "            Target Name : ${TIMBER_ENGINE_TARGET_NAME} --> Step 
 add_library(${TIMBER_ENGINE_TARGET_NAME} STATIC 
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/application.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/application.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/AssetManager.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/AssetManager.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/EntryPoint.h
-	${CMAKE_CURRENT_SOURCE_DIR}/src/EntryPoint.cpp	
- )
+	${CMAKE_CURRENT_SOURCE_DIR}/src/EntryPoint.cpp
+	
+  "include/framework/Core.h" "src/framework/Core.cpp")
 
 message(STATUS "            Target Name : ${TIMBER_ENGINE_TARGET_NAME} --> Step 2 : Add ${CMAKE_CURRENT_SOURCE_DIR}/include folder for include directory")
 target_include_directories(${TIMBER_ENGINE_TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

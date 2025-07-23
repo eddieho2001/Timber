@@ -2,7 +2,7 @@
 #include"framework/application.h"
 
 int main() {
-	ly::Application* objApp = GetApplication();
+	timber::Application* objApp = GetApplication();
 	objApp->run();
 
 }

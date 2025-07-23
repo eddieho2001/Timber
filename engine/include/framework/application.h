@@ -1,10 +1,14 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include "framework/Core.h"
+
 //The class take the main function and divide them into three main parts
-namespace ly{
+namespace timber{
 	class Application {
 	public:
-		Application();
+		//In order to allow game application provide setting we need to change the constructor
+		//Application();
+		Application(unsigned int winWidth, unsigned int winHeight, const std::string& title, sf::Uint32 style);
 		void run();//Handle the game loop
 	private:
 		//There are three necessary parts in game loop :  
@@ -16,7 +20,7 @@ namespace ly{
 		sf::RenderWindow mWindow;
 		//sf::CircleShape mPlayer;
 		sf::Sprite mPlayer;
-		sf::Texture mTexture;
+		shared<sf::Texture> mTexture;
 		static const float PlayerSpeed;
 		//static const sf::Time TimePerFrame;
 		bool mIsMovingUp;
@@ -26,6 +30,8 @@ namespace ly{
 		//The number of cycle as per second we will looking for
 		float mTargetFrameRate;
 		sf::Clock mTickClock;
+		sf::Texture mBackground;
+		
 
 	};
 }

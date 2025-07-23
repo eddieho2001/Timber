@@ -24,5 +24,27 @@ endfunction()
 message(STATUS "            Target Name : ${TIMBER_GAME_TARGET_NAME} --> Step 4 : Copy ${TIMBER_ENGINE_TARGET_NAME}.lib file for executable")
 CopyLibDirToTarget(${TIMBER_ENGINE_TARGET_NAME} ${TIMBER_GAME_TARGET_NAME})
 
+#Handle relative path for game assets 
+set(ASSET_FOLDER_NAME "assets")
+set(ASSET_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${ASSET_FOLDER_NAME}")
+
+add_custom_command(
+	TARGET ${TIMBER_GAME_TARGET_NAME}
+	POST_BUILD
+	COMMAND
+	${CMAKE_COMMAND} -E copy_directory
+	${ASSET_SRC_DIR}
+	$<TARGET_FILE_DIR:${TIMBER_GAME_TARGET_NAME}>/${ASSET_FOLDER_NAME}
+)
+
+message(STATUS "${TIMBER_GAME_TARGET_NAME} -  Copied assets from ${ASSET_SRC_DIR} to ${TIMBER_GAME_TARGET_NAME}/${ASSET_FOLDER_NAME}")
+message(STATUS "${TIMBER_GAME_TARGET_NAME} -  Modified config.h.in --> config.h for assets resources...")
+
+configure_file(
+	"config.h.in"
+	"${CMAKE_CURRENT_SOURCE_DIR}/include/config.h" ESCAPE_QUOTES
+)
+
+
 
 

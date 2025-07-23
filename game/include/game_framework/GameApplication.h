@@ -1,8 +1,10 @@
 #pragma once
 #include <framework/application.h>
 
-namespace ly {
+namespace timber {
 	class GameApplication : public Application {
+	public:
+		GameApplication();
 
 	};
 }
