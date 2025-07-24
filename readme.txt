@@ -1,16 +1,28 @@
 Current Reading:
-1 ) 01-01-BeginningC++GameProgramming-LearnC++FromScratchByBuildingFunGames 3rd Ed.pdf
+1 ) 01-01-Beginning C++ Game Programming-LearnC++FromScratchByBuildingFunGames 3rd Ed.pdf
 2 ) MasteringC++GameDevelopment-CreateProfessionalAndRealistic3DGamesUsingC++17
-
+3 ) C++ Memory Management(7 28/434)
+4 ) Deciphering Object-Oriented Programming With C++
+5 ) C++ Primer 5thEd - For fully understand Modern C++ standard
+  
+Purpose : Timber is related simple game which is the first eample game from Beginning C++ Game Programming-LearnC++FromScratchByBuildingFunGames 3rd Ed, 
+		  I try to follow the game flow using a more useful framework that learning from Udemy course to studying C++.
+		  I called this framework as mini-unreal-engine-gameplay-framework such core framework start from: 
+			1. core data structure
+			2. modern C++ memory utilities classes such as shared_ptr, unique_ptr & weak_ptr 
+			3. implement Actor and World classes.
+			4. AssetManager class for manage resources
 Timberman:
 Version Facts(Changed/Added/Modified/Deleted)
 - v0.0.3 - Change Application object's ctor for which pass parameters for configure screen window
-         - Add using declaration in Core.h, config.h for runtime determine the asset root path & AssetManager in framework
+         - Using alias-declaration(using statement) declare C++ standard library utilities in Core.h, 
+		 - config.h for runtime determine the asset root path & AssetManager in framework
 		 - Change how Application object load texture from assets folder by AssetManager
          - Add build time generate context in config.h.in with game/CMakeList.txt		 
 
 - v0.0.4 - Add Actor class for the game that represent nay moveable or non-moveable object in the game.
-           Add World class that manage lifetime and activities of that actors. 
+           Add World class that manage lifetime and activities of that actors.
+		   	
 Game Mechanics:
 	- Time is always running out.
 	- You can get more time by chopping the tree.
@@ -111,8 +123,44 @@ AActor and UWorld classes in Unreal Engine:
 				  - Lifecycle 	 | - Actors are ticked, updated, and destroyed by the UWorld. 
 				  - Access 		 | - Actors can call GetWorld() to interact with their environment. 
 
- 
-    	
+Refenencing:Unreal Engine Gameplay Framework
+https://www.tomlooman.com/unreal-engine-gameplay-framework/
+
+Language Tools for Programming:
+	- Using namespace
+	- a set of smart pointer for management resources objects
+	- template for reducing common code section
+	- Inheritance and polymorphism
+	  Example: 
+				class Enemy{
+				public:
+					void RunAIScripts();
+					void Update(float deltaTime);
+				private:
+					int mHealth;
+					int mDamage;
+				};
+				
+				class Boss : public Enemy{
+				public:
+					void Update(float deltaTime);
+					....
+				}
+				
+		This type of structure is commonly referred to as a parent and child hierarchy(Inheritance) where the Boss class is a child of the Enemy class.
+		This means that Boss will now have all the required structure from Enemy class. And it should point out that we only inherted the
+		functions and variables that are declared public section. That is because using inheritance, the public methods and variable of the class
+		are expored to everyone using the class. The protected section methods and variables are only available to the class itself and any classes derived. 
+		The private methods and variables are only available to that class, no one else has access, even derived class.
+
+polymorphism and virtual functions:
+			
+Design Patterns for programming game:
+	- Template Method : Define behavior skeleton for Actor class and Its child classes for which we can differential each different type of sub class behavior.
+	                    it involve how to design update game objects
+    - Singleton       : Define centralized management resources. 	
+    - State pattern   : Handle set of game state
+	
 	
 
 	
